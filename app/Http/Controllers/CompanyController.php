@@ -15,7 +15,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return Company::all();
+        return Company::paginate(10);
     }
 
     /**
@@ -47,9 +47,7 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        $company = Company::find($id);
-
-        return $company;
+        return Company::find($id);
     }
 
     /**
@@ -59,7 +57,9 @@ class CompanyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Company $company)
-    { }
+    {
+        //
+    }
 
     /**
      * Update the specified resource in storage.

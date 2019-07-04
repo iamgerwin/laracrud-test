@@ -25,9 +25,9 @@ class CompanyStore extends FormRequest
     {
         return [
             'name'          => 'required|max:255',
-            'email'         => 'email|max:255',
-            'logo'          => 'string|max:255', //'bail|image|dimensions:max_width=100,max_height=100',
-            'website'       => 'string|max:255',
+            'email'         => 'nullable|email|max:255',
+            'logo'  => 'nullable|dimensions:max_width=100,max_height=100',
+            'website'       => 'nullable|string|max:255',
         ];
     }
 }

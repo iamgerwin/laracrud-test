@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Company;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Http\UploadedFile;
 
 class CompanyPageTest extends TestCase
 {
@@ -24,14 +25,18 @@ class CompanyPageTest extends TestCase
     public function userCanAddCompany()
     {
         $this->withExceptionHandling();
-
         $response = $this->post('/company', [
             'name'          =>  'Acme Co',
             'email'         =>  'gerwin@acme.com',
-            'logo'          =>  'test.png',
+            'logo'          =>  UploadedFile::fake()->image(
+                storage_path('app/public'),
+                100,
+                100,
+                null,
+                false
+            ),
             'website'       =>  'www.acme.com',
         ]);
-
         $company = Company::first();
 
         $response->assertStatus(200);
@@ -42,6 +47,33 @@ class CompanyPageTest extends TestCase
             'logo'      => $company->logo,
             'website'   => $company->website
         ]);
+    }
+
+    /**
+     * User cannot add company more than 100x100 image dimension
+     *
+     * @test
+     * @group  company-crud
+     * @return void
+     */
+    public function userCannotAddCompanyImageDimensionMax100x100()
+    {
+        $this->withExceptionHandling();
+        $response = $this->post('/company', [
+            'name'          =>  'Acme Co',
+            'email'         =>  'gerwin@acme.com',
+            'logo'          =>  UploadedFile::fake()->image(
+                storage_path('app/public'),
+                101,
+                101,
+                null,
+                false
+            ),
+            'website'       =>  'www.acme.com',
+        ]);
+        $company = Company::first();
+
+        $response->assertSessionHasErrors('logo');
     }
 
     /**
@@ -84,12 +116,10 @@ class CompanyPageTest extends TestCase
      */
     public function companyListPaginatedTenItems()
     {
-        $companies = factory('App\Company', 20)->create();
-
         $response = $this->call('GET', '/company');
-        dd($response->decodeResponseJson());
+
         $response->assertStatus(200);
-        $response->assertSee('tests');
+        $this->assertEquals(10, $response->decodeResponseJson()["per_page"]);
     }
 
     /**
