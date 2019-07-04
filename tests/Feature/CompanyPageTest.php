@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\Company;
 use Tests\TestCase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Company;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Http\UploadedFile;
 
 class CompanyPageTest extends TestCase
 {
@@ -154,7 +154,13 @@ class CompanyPageTest extends TestCase
         $this->post('/company', [
             'name'          =>  'this-shouldbe-update',
             'email'         =>  'update@acme.com',
-            'logo'          =>  'update.png',
+            'logo'          =>  UploadedFile::fake()->image(
+                storage_path('app/public'),
+                100,
+                100,
+                null,
+                false
+            ),
             'website'       =>  'update.comm',
         ]);
 
@@ -163,7 +169,13 @@ class CompanyPageTest extends TestCase
         $newValues = [
             'name'      =>  'this-is-a-new-company-name',
             'email'     =>  'newupdate@acme.com',
-            'logo'      =>  'newupdate.png',
+            'logo'      =>  UploadedFile::fake()->image(
+                storage_path('app/public'),
+                100,
+                100,
+                null,
+                false
+            ),
             'website'   =>  'newupdate.comm',
         ];
 
@@ -189,7 +201,13 @@ class CompanyPageTest extends TestCase
         $this->post('/company', [
             'name'          =>  'this-shouldbe-update',
             'email'         =>  'update@acme.com',
-            'logo'          =>  'update.png',
+            'logo'          =>  UploadedFile::fake()->image(
+                storage_path('app/public'),
+                100,
+                100,
+                null,
+                false
+            ),
             'website'       =>  'update.comm',
         ]);
 
@@ -198,7 +216,13 @@ class CompanyPageTest extends TestCase
         $newValues = [
             'name'      =>  '',
             'email'     =>  'newupdate@acme.com',
-            'logo'      =>  'newupdate.png',
+            'logo'      =>  UploadedFile::fake()->image(
+                storage_path('app/public'),
+                100,
+                100,
+                null,
+                false
+            ),
             'website'   =>  'newupdate.comm',
         ];
 
@@ -209,6 +233,41 @@ class CompanyPageTest extends TestCase
         );
 
         $response->assertSessionHasErrors('name');
+    }
+
+    /**
+     * Company cannot above max dimensions 100x100
+     *
+     * @test
+     * @group  company-crud
+     * @return void
+     */
+    public function companyCannotUpdateAboveMaxDimensions()
+    {
+        factory(\App\Company::class)->create();
+
+        $company = Company::first();
+
+        $newValues = [
+            'name'      =>  'new name',
+            'email'     =>  'newupdate@acme.com',
+            'logo'      =>  UploadedFile::fake()->image(
+                storage_path('app/public'),
+                101,
+                101,
+                null,
+                false
+            ),
+            'website'   =>  'newupdate.comm',
+        ];
+
+        $response = $this->call(
+            'PATCH',
+            '/company/' . $company->id,
+            array_merge($newValues, ['_token' => csrf_token()])
+        );
+
+        $response->assertSessionHasErrors('logo');
     }
 
     /**
@@ -223,7 +282,13 @@ class CompanyPageTest extends TestCase
         $this->post('/company', [
             'name'          =>  'this-shouldbe-deleted',
             'email'         =>  'delete@acme.com',
-            'logo'          =>  'delete.png',
+            'logo'          =>  UploadedFile::fake()->image(
+                storage_path('app/public'),
+                100,
+                100,
+                null,
+                false
+            ),
             'website'       =>  'delete.comm',
         ]);
 

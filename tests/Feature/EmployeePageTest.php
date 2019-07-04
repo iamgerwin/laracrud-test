@@ -153,37 +153,65 @@ class EmployeePageTest extends TestCase
     }
 
     /**
-     * employee cannot without name
+     * employee cannot without first_name
      *
      * @test
      * @group  employee-crud
      * @return void
      */
-    public function employeeCannotUpdateWithoutName()
+    public function employeeCannotUpdateWithoutFirstName()
     {
-        // $this->post('/employee', [
-        //     'name'          =>  'this-shouldbe-update',
-        //     'email'         =>  'update@acme.com',
-        //     'logo'          =>  'update.png',
-        //     'website'       =>  'update.comm',
-        // ]);
+        $company = factory('App\Company')->create();
+        $employee = factory('App\Employee')->create();
 
-        // $employee = employee::first();
+        $employee = Employee::first();
 
-        // $newValues = [
-        //     'name'      =>  '',
-        //     'email'     =>  'newupdate@acme.com',
-        //     'logo'      =>  'newupdate.png',
-        //     'website'   =>  'newupdate.comm',
-        // ];
+        $newValues = [
+            'first_name'    =>  null,
+            'last_name'     =>  'new last name',
+            'company_id'    =>  factory(\App\Company::class)->create()->id,
+            'email'         =>  'new@emaill.com',
+            'phone'         =>  '9392233111',
+        ];
 
-        // $response = $this->call(
-        //     'PATCH',
-        //     '/employee/' . $employee->id,
-        //     array_merge($newValues, ['_token' => csrf_token()])
-        // );
+        $response = $this->call(
+            'PATCH',
+            '/employee/' . $employee->id,
+            array_merge($newValues, ['_token' => csrf_token()])
+        );
 
-        // $response->assertSessionHasErrors('name');
+        $response->assertSessionHasErrors('first_name');
+    }
+
+    /**
+     * employee cannot without last_name
+     *
+     * @test
+     * @group  employee-crud
+     * @return void
+     */
+    public function employeeCannotUpdateWithoutLastName()
+    {
+        $company = factory('App\Company')->create();
+        $employee = factory('App\Employee')->create();
+
+        $employee = Employee::first();
+
+        $newValues = [
+            'first_name'    =>  'new first name',
+            'last_name'     =>  '',
+            'company_id'    =>  factory(\App\Company::class)->create()->id,
+            'email'         =>  'new@emaill.com',
+            'phone'         =>  '9392233111',
+        ];
+
+        $response = $this->call(
+            'PATCH',
+            '/employee/' . $employee->id,
+            array_merge($newValues, ['_token' => csrf_token()])
+        );
+
+        $response->assertSessionHasErrors('last_name');
     }
 
     /**
