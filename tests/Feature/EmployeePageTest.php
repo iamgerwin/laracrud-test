@@ -5,12 +5,10 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Employee;
 
 class EmployeePageTest extends TestCase
 {
-    use DatabaseMigrations;
     use RefreshDatabase;
     use WithFaker;
 

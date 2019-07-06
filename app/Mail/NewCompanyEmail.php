@@ -29,6 +29,6 @@ class NewCompanyEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.mail.new_company');
+        return $this->view('mail.new_company', $this->company->toArray());
     }
 }

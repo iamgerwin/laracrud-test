@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Company;
 use App\Http\Requests\CompanyStore;
+use App\Notifications\CompanyAdded;
 
 class CompanyController extends Controller
 {
@@ -36,7 +37,9 @@ class CompanyController extends Controller
      */
     public function store(CompanyStore $request)
     {
-        Company::create($request->all());
+        $company = Company::create($request->all());
+
+        $company->notify(new CompanyAdded($company));
     }
 
     /**

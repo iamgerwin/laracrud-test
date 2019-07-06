@@ -1,1 +1,2 @@
-{{ __('mail.new_company', ['name'=> $company->name, 'website'=> $company->website]) }}
+
+{{ __('mail.new_company', ['name'=> $name, 'website'=> $website]) }}

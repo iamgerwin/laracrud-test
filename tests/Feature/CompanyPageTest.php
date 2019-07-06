@@ -7,11 +7,11 @@ use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\CompanyAdded;
 
 class CompanyPageTest extends TestCase
 {
-    use DatabaseMigrations;
     use RefreshDatabase;
     use WithFaker;
 
@@ -36,6 +36,7 @@ class CompanyPageTest extends TestCase
                 false
             ),
             'website'       =>  'www.acme.com',
+            '_token' => csrf_token(),
         ]);
         $company = Company::first();
 
@@ -85,7 +86,36 @@ class CompanyPageTest extends TestCase
      */
     public function userShouldReceiveEmailAfterCompanyAdded()
     {
-        // TODO: user should receive a notification email after company added
+        Notification::fake();
+
+        $response = $this->post('/company', [
+            'name'          =>  'Acme Co',
+            'email'         =>  'gerwin@acme.com',
+            'logo'          =>  UploadedFile::fake()->image(
+                storage_path('app/public'),
+                100,
+                100,
+                null,
+                false
+            ),
+            'website'       =>  'www.acme.com',
+            '_token' => csrf_token(),
+        ]);
+        $company = Company::first();
+
+        Notification::assertSentTo(
+            $company,
+            CompanyAdded::class,
+            function ($notification, $channels) use ($company) {
+                $mailData = $notification->toMail($company);
+                $this->assertEquals(
+                    strtoupper($company->name) . ' Company Added!',
+                    $mailData->subject
+                );
+
+                return $mailData->company->id === $company->id;
+            }
+        );
     }
 
     /**
