@@ -16,6 +16,18 @@ class CompanyPageTest extends TestCase
     use WithFaker;
 
     /**
+     * Setup the test environment.
+     *
+     * @return void
+     */
+    public function setUp(): void
+    {
+        parent::setUp();
+        $user = factory(\App\User::class)->create();
+        $this->actingAs($user);
+    }
+
+    /**
      * User can add company
      *
      * @test

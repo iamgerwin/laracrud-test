@@ -9,6 +9,8 @@ use App\Notifications\CompanyAdded;
 
 class CompanyController extends Controller
 {
+    protected $redirectTo = '/';
+
     /**
      * Display a listing of the resource.
      *
