@@ -36,7 +36,6 @@ class CompanyPageTest extends TestCase
      */
     public function userCanAddCompany()
     {
-        $this->withExceptionHandling();
         $response = $this->post('/company', [
             'name'          =>  'Acme Co',
             'email'         =>  'gerwin@acme.com',
@@ -50,6 +49,7 @@ class CompanyPageTest extends TestCase
             'website'       =>  'www.acme.com',
             '_token' => csrf_token(),
         ]);
+        dd($response->exception->getMessage());
         $company = Company::first();
 
         $response->assertStatus(200);
@@ -158,8 +158,9 @@ class CompanyPageTest extends TestCase
      */
     public function companyListPaginatedTenItems()
     {
+        factory(\App\Company::class)->create();
         $response = $this->call('GET', '/company');
-
+        // dd($response->decodeResponseJson());
         $response->assertStatus(200);
         $this->assertEquals(10, $response->decodeResponseJson()["per_page"]);
     }

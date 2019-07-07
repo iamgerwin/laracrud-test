@@ -8,12 +8,15 @@ use Illuminate\Notifications\Notifiable;
 class Company extends Model
 {
     use Notifiable;
-
     protected $table = 'companies';
     protected $guarded = [];
 
-    // public function getLogoAttribute()
-    // {
-    //     return $this->getOriginal('logo')->path();
-    // }
+    /**
+     * Relates to many employees
+     * @return Collection
+     */
+    public function employees()
+    {
+        return $this->belongsTo('App\Employee');
+    }
 }

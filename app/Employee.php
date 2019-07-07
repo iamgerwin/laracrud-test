@@ -14,4 +14,13 @@ class Employee extends Model
         'email',
         'phone',
     ];
+
+    /**
+     * Relates to single company
+     * @return \App\Company
+     */
+    public function company()
+    {
+        return $this->belongsTo('App\Company');
+    }
 }

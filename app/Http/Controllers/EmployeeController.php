@@ -15,6 +15,21 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return datatables()->of(Employee::latest()->get())
+                ->addColumn('action', function ($data) {
+                    $button = '<center><button type="button" name="edit" id="' . $data->id . '" class="edit btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i>  Edit</button>';
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></center>';
+                    return $button;
+                })
+                ->addColumn('company-display', function ($data) {
+                    return $data->company->name;
+                })
+                ->rawColumns(['logo-display', 'action'])
+                ->make(true);
+        }
+
         return Employee::paginate(10);
     }
 
@@ -82,5 +97,14 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         $employee->delete();
+    }
+
+    /**
+     * Show UI for companies index
+     * @return View
+     */
+    public function appIndex()
+    {
+        return view('page.employee');
     }
 }

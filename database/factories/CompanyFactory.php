@@ -5,6 +5,7 @@
 use App\Company;
 use Faker\Generator as Faker;
 use Illuminate\Http\UploadedFile;
+use Ramsey\Uuid\Generator\RandomBytesGenerator;
 
 $factory->define(Company::class, function (Faker $faker) {
     return [
