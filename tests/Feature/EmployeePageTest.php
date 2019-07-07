@@ -44,7 +44,6 @@ class EmployeePageTest extends TestCase
 
         $employee = Employee::first();
 
-        $response->assertStatus(200);
         $this->assertDatabaseHas('employees', [
             'first_name'    => $employee->first_name,
             'last_name'     => $employee->last_name,

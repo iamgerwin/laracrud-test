@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c33eb751124e4d799850f1f5c65b369",
+    "content-hash": "f345025149da5f2d74ddd5de85c4d02d",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2876,63 +2876,6 @@
             "time": "2019-06-15T22:40:20+00:00"
         },
         {
-            "name": "wewowweb/laravel-svelte-preset",
-            "version": "v0.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wewowweb/laravel-svelte-preset.git",
-                "reference": "050c179ac1723de0217467c4ff2b5992ff143d40"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wewowweb/laravel-svelte-preset/zipball/050c179ac1723de0217467c4ff2b5992ff143d40",
-                "reference": "050c179ac1723de0217467c4ff2b5992ff143d40",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "5.8.*",
-                "php": "^7.1"
-            },
-            "require-dev": {
-                "nunomaduro/larastan": "^0.3.17",
-                "orchestra/testbench": "3.8.*",
-                "phpunit/phpunit": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Wewowweb\\LaravelSveltePreset\\LaravelSveltePresetServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Wewowweb\\LaravelSveltePreset\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Gal Jakic",
-                    "email": "gal@wewowweb.com",
-                    "role": "Author"
-                }
-            ],
-            "description": "Svelte frontend preset for Laravel.",
-            "homepage": "https://github.com/wewowweb/laravel-svelte-preset",
-            "keywords": [
-                "We Wow Web",
-                "laravel",
-                "laravel-svelte-preset",
-                "svelte"
-            ],
-            "time": "2019-06-03T12:12:54+00:00"
-        },
-        {
             "name": "yajra/laravel-datatables-oracle",
             "version": "v9.4.1",
             "source": {
@@ -3290,16 +3233,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.4.0",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "1a1a1044ad00e285bd2825fac4c3a0443d90ad33"
+                "reference": "6fb502c23885701a991b0bba974b1a8eb6673577"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/1a1a1044ad00e285bd2825fac4c3a0443d90ad33",
-                "reference": "1a1a1044ad00e285bd2825fac4c3a0443d90ad33",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/6fb502c23885701a991b0bba974b1a8eb6673577",
+                "reference": "6fb502c23885701a991b0bba974b1a8eb6673577",
                 "shasum": ""
             },
             "require": {
@@ -3347,7 +3290,7 @@
                 "throwable",
                 "whoops"
             ],
-            "time": "2019-06-23T09:00:00+00:00"
+            "time": "2019-07-04T09:00:00+00:00"
         },
         {
             "name": "fzaninotto/faker",

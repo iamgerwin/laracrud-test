@@ -8,16 +8,11 @@ use Illuminate\Http\UploadedFile;
 use Ramsey\Uuid\Generator\RandomBytesGenerator;
 
 $factory->define(Company::class, function (Faker $faker) {
+
     return [
         'name' => $faker->company,
         'email' => $faker->unique()->safeEmail,
-        'logo' => UploadedFile::fake()->image(
-            storage_path('app/public'),
-            100,
-            100,
-            null,
-            false
-        ),
+        'logo' => $faker->image(storage_path('app/public'), 100, 100, null, false),
         'website' => $faker->url,
     ];
 });

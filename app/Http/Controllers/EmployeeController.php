@@ -52,6 +52,8 @@ class EmployeeController extends Controller
     public function store(EmployeeStore $request)
     {
         Employee::create($request->all());
+
+        return redirect(route('app.employee'));
     }
 
     /**
@@ -105,6 +107,8 @@ class EmployeeController extends Controller
      */
     public function appIndex()
     {
-        return view('page.employee');
+        $companies = \App\Company::all();
+
+        return view('page.employee', compact('companies'));
     }
 }

@@ -36,23 +36,22 @@ class CompanyPageTest extends TestCase
      */
     public function userCanAddCompany()
     {
+        $logo = UploadedFile::fake()->image(
+            storage_path('app/public'),
+            100,
+            100,
+            null,
+            false
+        );
         $response = $this->post('/company', [
             'name'          =>  'Acme Co',
             'email'         =>  'gerwin@acme.com',
-            'logo'          =>  UploadedFile::fake()->image(
-                storage_path('app/public'),
-                100,
-                100,
-                null,
-                false
-            ),
+            'logo'          =>  $logo,
             'website'       =>  'www.acme.com',
             '_token' => csrf_token(),
         ]);
-        dd($response->exception->getMessage());
-        $company = Company::first();
 
-        $response->assertStatus(200);
+        $company = Company::first();
 
         $this->assertDatabaseHas('companies', [
             'name'      => $company->name,

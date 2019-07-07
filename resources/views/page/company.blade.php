@@ -44,6 +44,16 @@
 @endsection
 
 @section('boxBody')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <table id="company-table" class="hover table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
@@ -99,7 +109,7 @@
                         <p class="help-block">Image format - Max width: 100 & Max height: 100 </p>
                     </div>
                     <div class="form-group">
-                        <label for="email">Website</label>
+                        <label for="website">Website</label>
                         <input type="text" class="form-control" id="website" name="website" placeholder="Website">
                     </div>
                 </div>

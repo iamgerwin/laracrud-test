@@ -74,6 +74,9 @@ class CompanyController extends Controller
         if ($request->email) {
             $company->notify(new CompanyAdded($company));
         }
+
+        // return response($company->toJson(), 200);
+        return redirect(route('app.company'));
     }
 
     /**
