@@ -32,6 +32,11 @@
 
             });
             $('#employee-table tbody').on('click', 'tr', function () {
+                // var data = table.row( this ).data();
+                // console.log(data);
+            } );
+
+            $('button.delete').on('click', 'button', function () {
                 var data = table.row( this ).data();
                 console.log(data);
             } );
@@ -102,11 +107,11 @@
                     @csrf
                     <div class="form-group">
                         <label for="first_name">First Name</label>
-                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
                     </div>
                     <div class="form-group">
                         <label for="last_name">Last Name</label>
-                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required>
                     </div>
                     <div class="form-group">
                         <label for="company_id">Company</label>

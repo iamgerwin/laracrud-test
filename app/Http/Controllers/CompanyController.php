@@ -26,7 +26,14 @@ class CompanyController extends Controller
                 ->addColumn('action', function ($data) {
                     $button = '<center><button type="button" name="edit" id="' . $data->id . '" class="edit btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i>  Edit</button>';
                     $button .= '&nbsp;&nbsp;';
-                    $button .= '<button type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></center>';
+                    $button .= '<form action="' . route(
+                        'company.destroy',
+                        $data->id
+                    ) . '" method="post">
+                        <input type="hidden" name="_token" value="' . csrf_token() . '">
+                        <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="delete btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+                        </form>';
                     return $button;
                 })
                 ->addColumn('logo-display', function ($data) {
@@ -58,24 +65,26 @@ class CompanyController extends Controller
      */
     public function store(CompanyStore $request)
     {
-        $logo = $request->file('logo');
-        Storage::disk('public')->put(
-            $request->logo->getClientOriginalName(),
-            File::get($logo)
-        );
+        $logo = $request->file('logo') ? $request->file('logo') : null;
+        if ($logo) {
+            Storage::disk('public')->put(
+                $request->logo->getClientOriginalName(),
+                File::get($logo)
+            );
+            $logo = $request->logo->getClientOriginalName();
+        }
 
         $company = new Company();
         $company->name = $request->name;
         $company->email = $request->email;
         $company->website = $request->website;
-        $company->logo = $request->logo->getClientOriginalName();
+        $company->logo = $logo;
         $company->save();
 
         if ($request->email) {
             $company->notify(new CompanyAdded($company));
         }
 
-        // return response($company->toJson(), 200);
         return redirect(route('app.company'));
     }
 
@@ -105,7 +114,6 @@ class CompanyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(CompanyStore $request, Company $company)
@@ -122,6 +130,8 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         $company->delete();
+
+        return redirect(route('app.company'));
     }
 
     /**

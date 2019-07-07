@@ -242,7 +242,7 @@ class EmployeePageTest extends TestCase
             ['_token' => csrf_token()]
         );
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
         $this->assertDatabaseMissing('employees', ['id' => $employee->id]);
     }
 }

@@ -20,7 +20,15 @@ class EmployeeController extends Controller
                 ->addColumn('action', function ($data) {
                     $button = '<center><button type="button" name="edit" id="' . $data->id . '" class="edit btn btn-primary btn-sm"><i class="fa fa-edit" aria-hidden="true"></i>  Edit</button>';
                     $button .= '&nbsp;&nbsp;';
-                    $button .= '<button type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button></center>';
+                    $button .= '<form action="' . route(
+                        'employee.destroy',
+                        $data->id
+                    ) . '" method="post">
+                    <input type="hidden" name="_token" value="' . csrf_token() . '">
+                    <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="delete btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+                    </form>';
+
                     return $button;
                 })
                 ->addColumn('company-display', function ($data) {
@@ -99,6 +107,8 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         $employee->delete();
+
+        return redirect(route('app.employee'));
     }
 
     /**

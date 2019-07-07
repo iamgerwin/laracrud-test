@@ -341,7 +341,7 @@ class CompanyPageTest extends TestCase
             ['_token' => csrf_token()]
         );
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
         $this->assertDatabaseMissing('companies', ['id' => $company->id]);
     }
 }
