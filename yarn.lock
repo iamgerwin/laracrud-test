@@ -2040,6 +2040,10 @@ emojis-list@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-2.1.0.tgz#4daa4d9db00f9819880c79fa457ae5b09a1fd389"
 
+emojis-list@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-3.0.0.tgz#5570662046ad29e2e916e71aae260abdff4f6a78"
+
 encodeurl@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/encodeurl/-/encodeurl-1.0.2.tgz#ad3ff4c86ec2d029322f5a02c3a9a606c95b3f59"
@@ -3232,6 +3236,10 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
+laravel-mix-svelte@^0.1.0:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/laravel-mix-svelte/-/laravel-mix-svelte-0.1.6.tgz#8e009932dbb6663707562d4f082b694000e39516"
+
 laravel-mix@^4.0.7:
   version "4.0.16"
   resolved "https://registry.yarnpkg.com/laravel-mix/-/laravel-mix-4.0.16.tgz#449c121021f062f03707bf49d1221d4640760d07"
@@ -3291,12 +3299,20 @@ loader-runner@^2.3.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.4.0.tgz#ed47066bfe534d7e84c4c7b9998c2a75607d9357"
 
-loader-utils@1.2.3, loader-utils@^1.0.1, loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.2.3:
+loader-utils@1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-1.2.3.tgz#1ff5dc6911c9f0a062531a4c04b609406108c2c7"
   dependencies:
     big.js "^5.2.2"
     emojis-list "^2.0.0"
+    json5 "^1.0.1"
+
+loader-utils@^1.0.1, loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.2.3:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-1.4.2.tgz#29a957f3a63973883eb684f10ffd3d151fec01a3"
+  dependencies:
+    big.js "^5.2.2"
+    emojis-list "^3.0.0"
     json5 "^1.0.1"
 
 locate-path@^3.0.0:
@@ -3579,8 +3595,8 @@ minimist@0.0.8:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
 
 minimist@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.7.tgz#daa1c4d91f507390437c6a8bc01078e7000c4d18"
 
 minipass@^2.2.1, minipass@^2.3.5:
   version "2.3.5"
@@ -5248,6 +5264,21 @@ supports-color@^5.3.0, supports-color@^5.4.0:
   dependencies:
     has-flag "^3.0.0"
 
+svelte-dev-helper@^1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/svelte-dev-helper/-/svelte-dev-helper-1.1.9.tgz#7d187db5c6cdbbd64d75a32f91b8998bde3273c3"
+
+svelte-loader@^2.13.4:
+  version "2.13.6"
+  resolved "https://registry.yarnpkg.com/svelte-loader/-/svelte-loader-2.13.6.tgz#3d5efd5886c2bab034606d5af0cce659da3ee555"
+  dependencies:
+    loader-utils "^1.1.0"
+    svelte-dev-helper "^1.1.9"
+
+svelte@^3.1.0:
+  version "3.53.1"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.53.1.tgz#db9d7df7a8f570e8e22547444c149208b1914442"
+
 svgo@^1.0.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/svgo/-/svgo-1.2.2.tgz#0253d34eccf2aed4ad4f283e11ee75198f9d7316"
@@ -5583,10 +5614,6 @@ vue-style-loader@^4.1.0:
 vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
-
-vue@^2.5.17:
-  version "2.6.10"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
 
 watchpack@^1.5.0:
   version "1.6.0"
